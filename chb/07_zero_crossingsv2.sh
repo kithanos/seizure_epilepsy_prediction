@@ -1,0 +1,47 @@
+
+
+#!bin/bin/bash
+
+
+#Diretorio do qual se encontra o programa que aplica o zero crossings nos vetores de dados
+programa="/home/lucas/Documentos/Projetos/seizure_epilepsy_prediction/zero_crossings"
+
+cd Dados
+pwd
+
+for pasta in chb**
+do
+    echo entrando na pasta: $pasta
+    cd $pasta
+
+    for pasta1 in chb*_*
+    do
+	echo entrando na pasta: $pasta1
+	cd $pasta1
+
+	for pasta_1 in c_chb*_*
+	do
+	    echo entrando na pasta: $pasta_1
+	    cd $pasta_1
+	    echo entrando na pasta: janelas
+	    cd janelas
+	    echo entrando na pasta: wavelets
+	    cd wavelets
+
+	    for arq in dwave_c_chb*_*
+	    do
+		echo encontrou arquivo $arq
+		zero=`"$programa"/zero_crossingsv1 $arq`
+		echo Zero Crossings: $zero
+		echo $zero >> zero_crossings.txt
+	    done
+	    cd ..
+	    cd ..
+	    cd ..
+	done
+	cd ..
+    done
+    cd ..
+done
+cd ..
+

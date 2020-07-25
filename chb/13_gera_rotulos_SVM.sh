@@ -1,0 +1,57 @@
+
+#!bin/bin/bash
+
+#echo Etapa 10: Gerando rótulos
+
+#Diretorio do qual se encontra o programa que gera rotulos para classificacao da SVM
+programa="/home/lucas/Documentos/Projetos/seizure_epilepsy_prediction/geraRotuloSVM"
+
+#echo "Digite quant. de dados da classe 1: "
+#read c1
+
+#echo "Digite quant. de dados da classe 2: "
+#read c2
+
+cd Dados
+pwd
+
+for pasta in chb**
+do
+    echo entrando na pasta: $pasta
+    cd $pasta
+
+    for pasta1 in v_chb**
+    do
+	echo entrando na pasta: $pasta1
+	cd $pasta1
+
+	for pasta2 in v_chb*_*
+	do
+	    echo entrando na pasta: $pasta2
+	    cd $pasta2
+
+	    echo "Digite quant. de dados da classe 1: "
+	    read c1
+
+	    echo "Digite quant. de dados da classe 2: "
+	    read c2
+
+	    for arq in v_chb*_*
+	    do
+		echo encontrou arquivo $arq
+		nome_vetor=$(echo "r_SVM_$arq".txt | sed 's/\.ascii//')
+		#nome_vetor="rot_SVM_$arq".txt
+		"$programa"/geraRotuloSVM -a $c1 -b $c2 > "$nome_vetor"
+	    done
+	    cd ..
+	done
+	cd ..
+	cd ..
+    #cd ..
+done
+
+
+done		     
+cd ..
+pwd
+

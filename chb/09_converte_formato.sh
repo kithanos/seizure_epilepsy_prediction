@@ -1,0 +1,38 @@
+#Script que converte uma série de arquivos no formato .ascii
+
+#!bin/bin/bash
+
+#cd ..
+
+#echo Etapa 09: Ajustando formato...
+
+cd Dados
+pwd
+
+for pasta in chb**
+do
+    echo entrando na pasta: $pasta
+    cd $pasta
+
+    for pasta1 in chb*_*
+    do
+	echo entrando na pasta: $pasta1
+	cd $pasta1
+
+	for arq in v_chb*_*
+	do
+	    echo encontrou arquivo $arq
+	    mv "$arq" tmp
+	    mv tmp "$arq".ascii
+	done
+	
+	cd ..
+    done
+
+    cd ..
+
+done
+
+cd ..
+
+
